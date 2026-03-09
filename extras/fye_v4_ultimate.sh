@@ -48,7 +48,22 @@ header() {
   clear
   printf "\e[38;5;45m╔════════════════════════════════════════════════════════════════════╗\e[0m\n"
   printf "\e[38;5;45m║\e[0m   \e[38;5;99mF Y E   U L T I M A T E\e[0m   \e[38;5;51mKAWAII • CYBER • OPS\e[0m   \e[38;5;45m║\e[0m\n"
-  printf "\e[38;5;45m╚════════════════════════════════════════════════════════════════════╝\e[0m\n\n"
+  printf "\e[38;5;45m╚════════════════════════════════════════════════════════════════════╝\e[0m\n"
+  printf "\e[38;5;219m  (\"`•.¸(\"`•.¸  \e[38;5;45m★ FYE ★\e[38;5;219m  ¸.•`\")¸.•`\")\e[0m\n\n"
+}
+
+anime_title() {
+  local t="FYE (KAWAII) TOOL"
+  local frames=(
+    "\e[38;5;219m✦ $t ✦\e[0m"
+    "\e[38;5;45m✧ $t ✧\e[0m"
+    "\e[38;5;99m✦ $t ✦\e[0m"
+  )
+  for f in "${frames[@]}"; do
+    printf "\r%-80b" "$f"
+    sleep 0.08
+  done
+  printf "\n"
 }
 
 pause(){ read -rp "Press Enter to continue..." _; }
@@ -73,9 +88,10 @@ def tone(path, seq, rate=44100):
         w.setnchannels(1); w.setsampwidth(2); w.setframerate(rate)
         w.writeframes(b''.join(struct.pack('<h',x) for x in data))
 
-tone(os.path.join(out,'select.wav'), [(880,0.05,0.35),(1320,0.05,0.30)])
-tone(os.path.join(out,'kawaii.wav'), [(1046,0.06,0.35),(1318,0.06,0.35),(1567,0.08,0.30)])
-tone(os.path.join(out,'error.wav'), [(220,0.08,0.35),(180,0.08,0.30)])
+# all sounds are kawaii/chime-like (including error)
+tone(os.path.join(out,'select.wav'), [(1318,0.04,0.32),(1760,0.06,0.28)])
+tone(os.path.join(out,'kawaii.wav'), [(1046,0.05,0.34),(1318,0.05,0.34),(1567,0.07,0.30),(2093,0.07,0.25)])
+tone(os.path.join(out,'error.wav'), [(988,0.04,0.30),(880,0.05,0.28),(784,0.07,0.26)])
 print('ok')
 PY
 }
@@ -111,6 +127,7 @@ telegram_send() {
 
 while true; do
   header
+  anime_title
   cat <<MENU
 [STYLE/ANIMATIONS]
  1) Cyber Banner

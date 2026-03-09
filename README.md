@@ -22,8 +22,9 @@ A flashy terminal toolkit for Arch Linux (great in WSL too):
 - custom terminal pipes animation
 
 ### 🔊 SFX
-- local generated sound effects (select / kawaii / error)
+- local generated sound effects (all kawaii/chime style)
 - optional online sound-effect fetch
+- animated anime-style title shimmer in menu
 
 ### 🛠 Useful Utilities
 - system monitor (`btop`)
