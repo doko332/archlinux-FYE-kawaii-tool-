@@ -4,6 +4,9 @@ set -e
 cat > /home/extort/.local/bin/fye <<'EOF'
 #!/usr/bin/env bash
 beep() { printf '\a'; }
+select_sfx() { printf '\a'; sleep 0.03; printf '\a'; }
+kawaii_sfx() { printf '\a'; sleep 0.05; printf '\a'; sleep 0.05; printf '\a'; }
+error_sfx() { printf '\a'; sleep 0.15; printf '\a'; }
 header() {
   clear
   printf "\e[38;5;45m╔══════════════════════════════════════════════════════════════╗\e[0m\n"
@@ -37,12 +40,12 @@ while true; do
   echo " 0) Exit"
   echo ""
   read -rp "Choose option: " opt
-  beep
+  select_sfx
 
   case "$opt" in
     1) header; figlet EXTORT | lolcat; pause ;;
     2) cmatrix -ab -u 4 ;;
-    3) header; echo "(づ｡◕‿‿◕｡)づ" | lolcat; ponysay "extort mode" 2>/dev/null || cowsay "extort mode" | lolcat; pause ;;
+    3) kawaii_sfx; header; echo "(づ｡◕‿‿◕｡)づ" | lolcat; ponysay "extort mode" 2>/dev/null || cowsay "extort mode" | lolcat; pause ;;
     4) nyancat ;;
     5) header; fastfetch | lolcat; pause ;;
     6) ~/.local/bin/pipes ;;
@@ -58,7 +61,7 @@ while true; do
     16) header; echo '{"tool":"jq","status":"working","vibe":"fye"}' | jq .; pause ;;
     17) header; echo "Recording started. Ctrl+D to stop."; asciinema rec ;;
     0) break ;;
-    *) echo "invalid"; sleep 1 ;;
+    *) error_sfx; echo "invalid"; sleep 1 ;;
   esac
 done
 EOF
